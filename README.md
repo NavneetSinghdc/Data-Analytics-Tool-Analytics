@@ -14,7 +14,7 @@ We will be perform the following operations on the youtube dataset to learn more
 
 
 ### Step 1 - Read the youtube dataset and create a dataframe
-```
+```python
 import pandas as pd
 import numpy as np
 
@@ -24,7 +24,7 @@ data.head()  <!-- Display the top 5 records of the dataframe-->
 
 
 ### Step 2 - Function to calculate the distributuion of channel type from the top 1000 records
-```
+```python
 def subset_data_channeltype_distribution(df, no_of_rows):
   subset = df.head(no_of_rows)
   return subset.groupby('channeltype')['channeltype'].count()
@@ -34,28 +34,26 @@ subset_data_channeltype_distribution(data,1000)  <!-- Passing number of rows as 
 ```
 
 ### Step 3 - Insert Top 1000 records inserted into a CSV file
-```
+```python
 subset_data_frame = data.head(1000)
-```
-<!-- Change the file name with the name you want -->
-```
-subset_data_frame.to_csv("youtube_dataset_top_1000_rows.csv", index=False) 
+subset_data_frame.to_csv("youtube_dataset_top_1000_rows.csv", index=False) <!-- Change the file name with the name you want -->
 ```
 
 ### Step 4 - Read the Top 1000 records file created in Step 4
+```python
 <!-- Enter path to your file created in previous step -->
-```
 first_1k_data = pd.read_csv(r"Enter path to the file youtube_dataset_top_1000_rows.csv saved in above step") 
 ```
 
 ### Step 5 - Create a Sql connection and perform the following steps:
 
 - #### Create a database connection
+```python
 <!-- Replace username, password, hostname, database_name and table_name with your respective values-->
-```
 from sqlalchemy import create_engine
 sqlEngine = create_engine('mysql+pymysql://username:password@hostname') #replace username, password and hostname with your database username, password and host
 dbConnection = sqlEngine.connect()
+
 
 with sqlEngine.connect() as conn:
     conn.execute("commit")
