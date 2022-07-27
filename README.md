@@ -19,7 +19,7 @@ import pandas as pd
 import numpy as np
 
 data=pd.read_csv(r"Enter path to youtube_dataset.csv", encoding='cp1252')
-data.head()  <!-- Display the top 5 records of the dataframe-->
+data.head()  # Display the top 5 records of the dataframe
 ```
 
 
@@ -29,19 +29,19 @@ def subset_data_channeltype_distribution(df, no_of_rows):
   subset = df.head(no_of_rows)
   return subset.groupby('channeltype')['channeltype'].count()
 
-<!-- Calling a function -->
-subset_data_channeltype_distribution(data,1000)  <!-- Passing number of rows as a variable to make the function dynamic -->
+#Calling a function
+subset_data_channeltype_distribution(data,1000)  # Passing number of rows as a variable to make the function dynamic
 ```
 
 ### Step 3 - Insert Top 1000 records inserted into a CSV file
 ```python
 subset_data_frame = data.head(1000)
-subset_data_frame.to_csv("youtube_dataset_top_1000_rows.csv", index=False) <!-- Change the file name with the name you want -->
+subset_data_frame.to_csv("youtube_dataset_top_1000_rows.csv", index=False) # Change the file name with the name you want
 ```
 
 ### Step 4 - Read the Top 1000 records file created in Step 4
 ```python
-<!-- Enter path to your file created in previous step -->
+# Enter path to your file created in previous step
 first_1k_data = pd.read_csv(r"Enter path to the file youtube_dataset_top_1000_rows.csv saved in above step") 
 ```
 
@@ -49,7 +49,7 @@ first_1k_data = pd.read_csv(r"Enter path to the file youtube_dataset_top_1000_ro
 
 ### Create a database connection
 ```python
-<!-- Replace username, password, hostname, database_name and table_name with your respective values -->
+#Replace username, password, hostname, database_name and table_name with your respective values -->
 from sqlalchemy import create_engine
 sqlEngine = create_engine('mysql+pymysql://username:password@hostname') #replace username, password and hostname with your database username, password and host
 dbConnection = sqlEngine.connect()
@@ -62,11 +62,11 @@ with sqlEngine.connect() as conn:
 ```
 - ### Create a new table and import the csv file generated in Step 2 into it
 ```python
-first_1k_data.to_sql('table_name',con=sqlEngine, schema = 'database_name',index=False,if_exists='append')  #replace table_name and database_name with the name of  table and the database you want to create
+first_1k_data.to_sql('table_name',con=sqlEngine, schema = 'database_name',index=False,if_exists='append')  # Replace table_name and database_name with the name of  table and the database you want to create
 ```
 - ### Read data from the table created in previous step and display it
 ```python
-frame = pd.read_sql("select * from database_name.table_name", dbConnection);  #replace table_name and database_name with the name of  table and the database you want to create
+frame = pd.read_sql("select * from database_name.table_name", dbConnection);  # Replace table_name and database_name with the name of  table and the database you want to create
 pd.set_option('display.expand_frame_repr', False)
 ```
 
